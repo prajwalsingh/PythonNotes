@@ -1,0 +1,2961 @@
+<Html>
+   <Head>
+   	     <Title>Pyhton Notes</Title>
+   </Head>
+
+   <Body>
+     
+    <H3 style="color:WHITE;background: TOMATO; text-align: center;">FILES</H3> 
+      <div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+*
+file = open("samp.txt","w") ''' 
+                                This method is used to open file in specify mode 
+                                i.e either 
+                                write mode            : w 
+                                read mode             : r
+                                append mode           : a
+                                write in binary mode  : wb
+                                read  in binary mode  : rb
+                                append in binary mode : ab
+
+                             *Binary mode is used for Images , Music file e.t.c
+                             *By default files open in READ mode
+                             *Files initial content deleted when open in write mode   
+                             *That's why append mode is used if user want to keep old data
+                            '''    
+file.close()     # This method is used to close the files       
+
+
+
+* OS MODULE
+  ---------
+
+* The seperators in path of files is OS dependent
+
+* So inorder to solve this problem , an os module is used
+  ex:
+     import os
+     os.path.join('filenameA','fileNameB','fileNameC')
+
+     output : filenameA/fileNameB/fileNameC
+
+* We can get current working directory by using os.getcwd() method.
+
+* If path name is not given to any file then python self assume the current
+  working directory as file path. 
+
+* We can change directiry by using os.chdir(pathToNewDir) method
+
+* Absolute file path having all information i.e root and subfolders.
+  ex:
+     c:\\folder1\\folder2
+
+  Relative file path is not having information of root folder.
+  ex:
+     folder1\file.txt    
+
+* . means this directory.
+  .. parent directory.
+
+* We can concat absolute path with file name using os.path.abspath(fileName)
+
+  ex:
+     os.path.abspath(fileName)
+
+     c://folder1//fileName
+
+     abs path  : c:\\folder1\\folder2\\folder3\\folder4\\fileName  
+     
+     os.path.abspath('..\\..\\fileName')
+
+     then:
+       c:\\folder1\\folder2\\fileName
+
+* In order to chechk that whether or not file have its root folder name in path
+  os.path.isabs(filePath) we use this method , it return true or false according
+  to given file path.      
+
+* os.path.relpath(a,b) it give relative file path from comman path.
+  ex:
+      os.path.relpath('c:\\f1\\f2\\f3\\fileName','c:\\f1')
+
+      output :  f2\\f3\\fileName 
+      common part is c:\\f1
+
+* If we want to know directory name of file we use os.path.dirname(path)
+  and if we want to know file name from path we use os.path.basename(path)     
+
+* To check if specific file path exists or not on system we use os.path.exists(filName)  
+
+* If we want to check that particular path is file then we use os.path.isfile(fileName)
+  it return true or false .
+
+* If we want to check that particular path is folder then we use os.path.isdir(fileName)
+  it return true or false .
+
+* To get the size of file we use os.path.getsize(fileName) , it return a integer
+   having size of file in Bytes.
+
+* To get list of all files or folder present in folder , we use os.listdir(fileName) method
+  It return a list that contains list of files or folder inside that file.     
+
+* If we want to create a folder then we use os.makedirs(path) method.
+  ex:
+      os.makedirs("c:\\f1\\f2\\f3\\f4")
+
+      then:
+
+             c:
+              |__f1
+              |    |__f2
+                   |    |__f3
+                        |    |__f4
+                             |
+
+
+* Shelve Module
+  -------------
+
+* To store complex data shelve module is used.
+
+* shelve module store data in dictionary manner , it have keys and values.
+   
+  ex:
+    import shelve
+
+    selfFile = shelve.open('fileName')
+    selfFile['names'] = ['Light','L','Near','Naruto']
+    slefFile.close()
+  
+    selfFile = shelve.open('fileName')
+    print(selfFile['name'])
+    selfFile.close()
+
+* shelve file have two method keys() and values which return a list object.    
+
+  import shelve
+
+  selfFile = shelve.open('fileName')
+  ls = list(shelve.keys()) 
+  print(ls)
+  print(shelve.values()) 
+  slefFile.close() 
+
+* Shelve is work like stack , last values always at first.  
+
+
+
+* Shutil Module
+  -------------
+
+* There is library in python to manage files that is shutil.
+
+* we can copy one file to other using shutil.copy(src,dst) method.
+
+* we can copy on folder to other using shutil.copytree(src,dest) method.
+
+* we can move one file to other using shutil.move(src,dst) method.
+
+
+* Delete Files
+  ------------
+
+* Inorder to delete files a old method is there i.e os.unlink(fileName) 
+
+* To delete a empty folder os.rmdir(folderName) method is used.
+
+* To delete a non empty folder a method from shutil is used i.e shutil.rmtree(folderName)    
+
+* When we delete files or folder it completely deleted , in order to prevent
+  this another module is avail i.e send2trash , we have to install it.
+
+* There is a method inside send2trash i.e send2trash(fileName)
+  ex:
+    import send2trash
+
+    send2trash.send2trash(filePath)   
+   
+  Instead of deleting it, it moves to recycle bin. 
+
+
+
+* Directory Tree
+  --------------
+
+* Using method walk , we can access files and folder inside a folder.
+  ex:
+    import os
+
+    for fileName,subFolders,subFiles in os.walk(pathToFolder):
+        ptint(fileName,'\n')    
+        ptint(subFolders,'\n')    
+        ptint(subFiles,'\n')    
+
+
+* Writing and Reading PDF Files
+  -----------------------------
+
+* PDF files are hard to read and write because of in binary form.
+
+* We use a module to do this i.e PyPDF2, we have to install it using pip.
+
+* We can only extract Text from PDF.
+
+* We can not change text of file but we can only do changes with pages.
+
+
+
+* Reading and Writing WORD DOCUMENT
+  ----------------------------------
+* For this purpose we use python-docx module (pip install python-docx).
+* We import docx only.
+
+    		</pre>
+       </div>
+       <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Directory and Files)</span>
+import os
+import math
+
+print(os.path.join('folder1','folder2','folder3'),"\n")
+
+print(os.getcwd(),"\n")
+
+os.chdir('/home/prajwal_15/Videos')
+
+print("Files in directory :\n")
+
+fileList = os.listdir(os.getcwd())
+
+fileList.sort()
+
+totalSize = 0
+
+for file in fileList:
+  print((os.path.join(os.getcwd(),file))[0:10])
+  if  os.path.isfile(file):
+    totalSize += os.path.getsize((os.path.join(os.getcwd(),file)))
+
+print("\nTotal size of files is : ",float(totalSize),"Bytes")
+print("\nTotal size of files is : ",round(float(totalSize)/float(1000),1),"KB")
+print("\nTotal size of files is : ",round(float(totalSize)/float(1000**2),1),"MB")
+print("\nTotal size of files is : ",round(float(totalSize)/float(1000**3),1),"GB")
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Reading Methods)</span>
+
+file = open("samp.txt","r")
+
+#cont = file.read() # <span style="background: RED; color: WHITE;">This read entire content of file </span>
+
+#print(cont)  
+
+cont = file.read(10); # <span style="background: RED; color: WHITE;">This reads 10 bytes of file which is equivalent to one character size , so it seems like it reads 10 character</span>
+
+print(cont)
+
+cont = file.read(5); # <span style="background: RED; color: WHITE;">It reads next 5 bytes of file , from previous position </span>
+
+print(cont)
+
+cont = file.read(); # <span style="background: RED; color: WHITE;">It reads rest of file from previous position of file pointer</span>
+
+print(cont)
+
+
+file.close()
+
+
+#<span style="background: BROWN; color: WHITE;">Code 2 : (Read Each Line Seperately) </span>
+
+file = open("samp.txt","r")
+
+cont = file.readlines() #<span style="background: RED; color: WHITE;"> This method read each line of file and return it as a list</span>
+
+print("File content :",cont) # <span style="background: RED; color: WHITE;">This print entire list in single line</span>
+print("")
+
+i = 1
+
+for line in cont:
+  print("Line ",i,":",line) # <span style="background: RED; color: WHITE;">This print each line sperate</span>
+  i += 1
+
+file.close()    
+
+
+#<span style="background: BROWN; color: WHITE;">Code 3 : (Write into file)</span>
+
+file = open("samp.txt", "w")
+
+file.write("Hello Everyone, How's Going ??\n") #<span style="background: RED; color: WHITE;"> This method is used to write into file and </span>
+                                               #<span style="background: RED; color: WHITE;"> it also written number of bytes written in file </span>
+                                               #<span style="background: RED; color: WHITE;">  but only for python 3.x not for 2.x   </span>
+countA = file.write("I Hope Everything is Fine...\n")
+
+print("Number of bytes written to file is :",countA)
+print("")
+
+file.close()
+
+file = open("samp.txt", "r")
+
+cont  = file.readlines()
+
+print("Text writen in file is :",cont)
+
+file.close()
+
+
+#<span style="background: BROWN; color: WHITE;">Code 4  :  (Using WITH)</span>
+
+with open("samp.txt","r") as f:    #<span style="background: RED; color: WHITE;"> This way is used to access file </span>
+    print(f.read())                #<span style="background: RED; color: WHITE;">  This way file is close at end </span>
+                                   #<span style="background: RED; color: WHITE;">  This creates a temporary variable (often called f)</span>
+                                   #<span style="background: RED; color: WHITE;">  which is only accessible in the indented block of the with statement </span>
+
+
+
+#<span style="background: BROWN; color: WHITE;">Code 5  :  (Reading and Writing PDF FILES)</span>
+
+import PyPDF2
+import os
+
+path = os.path.join(os.getcwd(),'PDF')
+pathA = os.path.join(path,'1.pdf')
+pathB = os.path.join(path,'2.pdf')
+
+pdfFile = open(pathA,'rb')
+
+reader = PyPDF2.PdfFileReader(pdfFile) # <span style="background: RED; color: WHITE;">We are passing file to pdf reader module and it return pdf reader object</span>
+
+print(reader.numPages) # <span style="background: RED; color: WHITE;">It store information that how many pages are in PDF FILE</span>
+
+# text = reader.getPage(0) # <span style="background: RED; color: WHITE;">This method is used to fetch page from pdf file.</span>
+
+# print(text.extractText()) # <span style="background: RED; color: WHITE;">This method is used to extract text from page</span>
+
+# for i in range(reader.numPages):
+#   print('Page ',i,'\n','-'*90)
+#   print((reader.getPage(i)).extractText())
+#   print('-'*90)
+
+pdfFile.close()
+
+
+pdfFileA = open(pathA,'rb')
+pdfFileB = open(pathB,'rb')
+readerA  = PyPDF2.PdfFileReader(pdfFileA) 
+readerB  = PyPDF2.PdfFileReader(pdfFileB) 
+
+outputPDF = open(os.path.join(path,'merge.pdf'), 'wb') # <span style="background: RED; color: WHITE;">This is file where we write our pdf</span>
+writeFile = PyPDF2.PdfFileWriter() # <span style="background: RED; color: WHITE;">It create a balnk pdf file but only in ram memory.</span>
+
+for i in range(readerA.numPages):
+  writeFile.addPage(readerA.getPage(i))
+
+for i in range(readerA.numPages):
+  writeFile.addPage(readerA.getPage(i))
+
+writeFile.write(outputPDF)
+
+pdfFileA.close()  
+pdfFileB.close()
+outputPDF.close()                                   
+
+       </pre> 
+      <hr/>
+
+
+    <H3 style="color:WHITE;background: ORANGE; text-align: center;">LIST</H3> 
+      <div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * The built-in functions map and filter are very useful higher-order functions that operate on lists.      
+
+ * The function map takes a function and an iterable as arguments, and returns a new iterable with the function applied to each argument. 
+
+ * The function filter filters an iterable by removing items that don't match a predicate (a function that returns a Boolean). 
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 :</span>
+
+def endl():
+	print("")
+
+
+
+my_list = [] #<span style="background: RED; color: WHITE;"> It create a blank list</span>
+
+my_list = ["Doreamon","Shinchan","Hello", "Hathori"] # <span style="background: RED; color: WHITE;">It create list with given values</span>
+
+print("List Items :",my_list)
+endl()
+
+my_list.append(1) # <span style="background: RED; color: WHITE;">This function append 1 to the end of the list</span>
+
+print("List Items after appending :",my_list)
+endl()
+
+print("Item 'Hello'  Index  :",my_list.index("Hello")) #<span style="background: RED; color: WHITE;"> This function shows index of given item</span>
+endl()
+
+my_list.insert(2,"Perman") # <span style="background: RED; color: WHITE;">This function insert value at given index</span>
+
+print("List after inserting value :",my_list)
+endl()
+
+print("value poped from index 1 is :",my_list.pop(1)) # <span style="background: RED; color: WHITE;">This function pop value from given index</span>
+endl()
+
+my_list.remove("Hello") # <span style="background: RED; color: WHITE;">This function remove matching values from list</span>
+
+print("List after removing item 'Hello' is : ",my_list)
+endl()
+
+my_list.insert(4,1)
+my_list.insert(5,1)
+my_list.insert(11,1)
+
+print("List :",my_list)
+endl()
+
+print("Number of times item '1' present in list is :",my_list.count(1)) # <span style="background: RED; color: WHITE;">This function count number of times given value present in the list</span>
+endl()
+
+#my_list.sort()  # <span style="background: RED; color: WHITE;">In Python3.x sort gives error when try to sort a list that contain mixed datatypes i.e string , integer e.t.c</span>
+#print("List after sorting :",my_list)
+#endl()
+
+
+del my_list[0:3] #<span style="background: RED; color: WHITE;"> This function delete value from list in given range</span>
+
+print("Item left in list after deletion of values from index 0 to 3 :",my_list)
+endl()
+
+print("New List {list(range(10))} :", my_list)
+endl()
+
+my_list = list(range(0,100,2)) #<span style="background: RED; color: WHITE;"> This create sequential list of numbers from 0 to 99 with jump of 2</span>
+
+print("New List {list(range(0,100,2))} :", my_list)
+endl()
+
+def add(x):
+  return x+5
+
+newList = list(map(add,my_list))  # <span style="background: RED; color: WHITE;">Map takes function and iterable as argument and return new iterable which having changes</span>
+
+print("Modified list using map :",newList,"\n")
+
+def check(x):
+  if x%2 ==0:
+    return True 
+
+ls = list(filter(check,newList)) # <span style="background: RED; color: WHITE;">Filter check that whether list element satisfy fn condition or not ,if it is then return those value</span>
+
+print("List after filter for even numbers :",ls,"\n")
+
+
+# <span style="background: RED; color: WHITE;">Following way we can create 2D List</span>
+
+my2DList = []
+
+for i in range(0,100,10):
+  inList = []
+  for j in range(i,i+10):
+    inList.append(j)
+  my2DList.append(inList)
+    
+for ls in my2DList:
+  print(ls)
+endl()
+		</pre>	
+      <hr/>    
+
+<H3 style="color:WHITE;background: PURPLE; text-align: center;">LIST SLICING</H3> 
+      <pre style="font-weight: bold; font-size: 15px;">
+
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * List slices provide a more advanced way of retrieving values from a list. 
+ 
+ * Basic list slicing involves indexing a list with two colon-separated integers. 
+ 
+ * This returns a new list containing all the values in the old list between the indices.
+ 
+ * Like the arguments to range, the first index provided in a slice is included in the result, but the second isn't.
+ 
+ * List slices can also have a third number, representing the step, to include only alternate values in the slice.
+ 
+ * Negative values can be used in list slicing (and normal list indexing).
+ 
+ * When negative values are used for the first and second values in a slice (or a normal index), 
+   they count from the end of the list.
+        </pre>  
+       </div>
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+ls = list(range(0,20,2))
+print(ls)
+print("")
+
+print("Values in list from 0 to 4 index are :",ls[0:5]) #<span style="background: RED; color: WHITE;">This way only value from index 0 to 4 are print</span> 
+print("")
+
+print("Values in list from [6:] index are :",ls[6:]) #<span style="background: RED; color: WHITE;">This way only value from index 6 to last are print</span> 
+print("")
+
+print("Values in list from [:] index are :",ls[:]) #<span style="background: RED; color: WHITE;">This way entire list is print</span> 
+print("")
+
+print("Values in list from [::3] index are :",ls[::3]) #<span style="background: RED; color: WHITE;">This way we can print list by jump of 3</span> 
+print("")
+
+print("Values in list from [1:-1] index are :",ls[:-1]) #<span style="background: RED; color: WHITE;">This way we can print list except last index as mention in negative</span> 
+print("")
+
+print("Values in list from [1:-3] index are :",ls[:-3]) #<span style="background: RED; color: WHITE;">This way we can print list except last index as mention in negative</span> 
+print("")
+
+print("Values in list from [::-1] index are :",ls[::-1]) #<span style="background: RED; color: WHITE;">This way we can reverse a list</span> 
+print("")
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE;background: INDIGO; text-align: center;">LIST COMPREHENSIONS</H3> 
+      <pre style="font-weight: bold; font-size: 15px;">
+
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * List comprehensions are a useful way of quickly creating lists whose contents obey a simple rule.
+ 
+ * List comprehensions are inspired by set-builder notation in mathematics.
+ 
+ * A list comprehension can also contain an if statement to enforce a condition on values in the list.
+ 
+ * Trying to create a list in a very extensive range will result in a MemoryError.
+   This code shows an example where the list comprehension runs out of memory.
+   even = [2*i for i in range(10**100)]
+
+        </pre>  
+       </div>
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+import random
+
+
+cubes = [i**3 for i in range(11)] # <span style="background: RED; color: WHITE;">This way we can create list fast</span>
+
+print("Cubes of number from 0 to 10 :",cubes)
+print("")
+
+
+evenNum = [i**4 for i in range(3,20) if (i**4)%2==0]
+
+print("Even Power of 4 of numbers in range from 3 to 20 :\n",evenNum)
+print("")
+
+randomv = [random.randint(0,1000) for i in range(30)]
+
+print("Random number from 0 to 29:\n",randomv)
+print("")
+
+# <span style="background: RED; color: WHITE;">Following way we can create 2D List using list comprehension way</span>
+
+my2DList = [[j for j in range(i,i+10)] for i in range(0,100,10)]
+
+for ls in my2DList:
+  print(ls)
+print("")
+    </pre>  
+      <hr/>
+
+
+
+<H3 style="color:WHITE;background: BLUE; text-align: center;">DICTIONARIES</H3> 
+      <pre style="font-weight: bold; font-size: 15px;">
+
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Only immutable objects can be used as keys to dictionaries. 
+ 
+ * Immutable objects are those that can't be changed. 
+ 
+ * So far, the only mutable objects you've come across are lists and dictionaries.
+ 
+ * Trying to use a mutable object as a dictionary key causes a TypeError.       
+ 
+ * To determine whether a key is in a dictionary, you can use in and not in, just as you can for a list.
+ 
+ * A useful dictionary method is get.It does the same thing as indexing, 
+   but if the key is not found in the dictionary it returns another specified 
+   value instead ('None', by default).
+        </pre>  
+       </div>
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+myD = {}  #<span style="background: RED; color: WHITE;">This create an empty dictionary </span>
+myD = {'key':'value','red':[255,0,0],'green':[0,255,0],'blue':[0,0,255]} #<span style="background: RED; color: WHITE;">This create a dictionary with given key:pair values </span>
+print(myD)
+print("")
+
+print(myD['red'])
+print("")
+
+
+for key,value in myD.items(): # <span style="background: RED; color: WHITE;">This way is used to fetch dicrtionary values seperately</span> 
+  print(key,'\t',value)
+print("") 
+
+
+myD[15] = 'Oggy' # <span style="background: RED; color: WHITE;"> This we can assign Dictionary New Values</span>
+
+print("New value to dictionary :",myD)
+print("")
+
+
+print("check if key : key is in dicitionary :",'key' in myD)
+print("")
+print("check if key : 15 is in dicitionary :",15 in myD)
+print("")
+print('check if key : yellow is in dicitionary ','yellow' in myD)
+print("")
+print('check if key : yellow not in dicitionary ','yellow' not in myD)
+print("")
+
+
+print("Fetching key 'red' :",myD.get("red")) #<span style="background: RED; color: WHITE;">This method is used to fetch value on the basis of key </span>
+                                             #<span style="background: RED; color: WHITE;">If Key is not present it return None or string pass to it </span>  
+print("")                      
+print("Fetching key 'yellow' :",myD.get("yellow"))
+print("")
+print("Fetching key 23 :",myD.get(23,"No key found"))
+print("")
+    </pre>  
+      <hr/>    
+
+
+<H3 style="color:WHITE;background: GREEN; text-align: center;">TUPLES</H3> 
+      <pre style="font-weight: bold; font-size: 15px;">
+
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Tuples are very similar to lists, except that they are immutable (they cannot be changed).
+ 
+ * Also, they are created using parentheses, rather than square brackets. 
+ 
+ * Trying to reassign a value in a tuple causes a TypeError.
+ 
+ * Tuples can be created without the parentheses, by just separating the values with commas.
+ 
+ * Tuples are faster than lists, but they cannot be changed.
+ 
+ * BOXING : When we assign different values to single variable then it is calles as boxing.   
+ 
+ * Nested tuple is tuple inside another tuple
+        </pre>  
+       </div>
+
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+myTuple = ()  #<span style="background: RED; color: WHITE;"> It creates  empty tuple</span>
+
+myTuple = (1, "RED", 23.45) #<span style="background: RED; color: WHITE;"> This way we can assign values to tuple</span>
+
+print("Items in tuple :",myTuple)
+print("")
+
+print("Item at index [2] is:",myTuple[2])
+print("")
+
+myTuple = "Hello" , "Shinchan" , "How" , 15 , 23.45    #<span style="background: RED; color: WHITE;">This way we can assign value to tuple without paranthesis</span>
+print("New Items in tuple :",myTuple)
+print("")
+
+myTuple = "Shinchan" , 5 , "Cartoon"
+
+print("New Items in tuple :",myTuple)
+print("")
+
+name, age, typ = myTuple      #<span style="background: RED; color: WHITE;">This way we can fetch tuple values separately into each variable </span>    
+
+print("Unboxing a tuple :",name,age,typ)
+print("")
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE;background: TEAL; text-align: center;">STRING FORMATTING</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * String formatting provides a more powerful way to embed non-strings within strings. 
+
+ * String formatting uses a string's format method to substitute a number of arguments in the string.
+
+ * String formatting can also be done with named arguments.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+ls = list(range(30,4,-2))
+
+msg = "This is numbers : {0},{1},{2},{0}".format(ls[0],ls[3],ls[2]) #<span style="background: RED; color: WHITE;">Each argument of the format function is placed in the string at the</span>
+                                                                    #<span style="background: RED; color: WHITE;">corresponding position, which is determined using the curly braces { }</span>  
+                                                                    #<span style="background: RED; color: WHITE;">Number inside brace represent order of filling values</span>  
+                                                                    #<span style="background: RED; color: WHITE;">if number of value is less than brace then,that brace take value of given index</span>  
+print(msg,"\n")
+
+msg = "This is numbers : {0},{1},{2},{1}".format(ls[0],ls[3],ls[2]) 
+print(msg,"\n")
+
+msg = "This is numbers : {0},{1},{2},{2}".format(ls[0],ls[3],ls[2]) 
+print(msg,"\n")
+
+
+player  = "score : {x} , life : {y}".format(x=1934,y=3)#<span style="background: RED; color: WHITE;">This way we can assign value easily to placeholders instead of remembering position</span>
+print(player,"\n")
+
+player  = "score : {x} , life : {y}".format(y=1934,x=3) 
+print(player,"\n")
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE;background: FORESTGREEN; text-align: center;">USEFUL FUNCTIONS</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Python contains many useful built-in functions and methods to accomplish common tasks.
+
+ * join - joins a list of strings with another string as a separator.
+
+ * replace - replaces one substring in a string with another.
+
+ * startswith and endswith - determine if there is a substring at the start and end of a string, respectively.
+
+ * To change the case of a string, you can use lower and upper.
+
+ * The method split is the opposite of join, turning a string with a certain separator into a list.
+
+ * To find the maximum or minimum of some numbers or a list, you can use max or min.
+ 
+ * To find the distance of a number from zero (its absolute value), use abs.
+ 
+ * To round a number to a certain number of decimal places, use round.
+ 
+ * To find the total of a list, use sum.
+
+ * Often used in conditional statements, all and any take a list as an argument, and return True if all or any 
+   (respectively) of their arguments evaluate to True (and False otherwise).
+ 
+ * The function enumerate can be used to iterate through the values and indices of a list simultaneously.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+samp = "Hello , my name is Doreamon. "
+
+print("Sample string is :",samp,"\n")
+
+sampA = [chr(i) for i in range(65,80)]
+
+sampB = [chr(i) for i in range(80,91)]
+
+print("Sample string A :",sampA,"\n")
+
+print("Sample string B :",sampB,"\n")
+
+sampC = "*".join("Hello")  # <span style="background: RED; color: WHITE;">This method is used to seperate string by any character</span>
+
+print("Sample string C after join :",sampC,"\n")  
+
+sampC = sampC.replace('*l','@') # <span style="background: RED; color: WHITE;">This method is used to replace characters</span>
+
+print("Sample string C after replacing *l :",sampC,"\n")  
+
+print("Check that smaple string C start with 'H*e' :",sampC.startswith("H*e"),"\n")  # <span style="background: RED; color: WHITE;">This method is used to check whether string </span>
+                                                                                     # <span style="background: RED; color: WHITE;">start with specific character or not</span>          
+
+print("Check that smaple string C end with '*o' :",sampC.endswith("*o"),"\n") # <span style="background: RED; color: WHITE;">This method is used to check whether string </span>
+                                                                              # <span style="background: RED; color: WHITE;">end with specific character or not</span>
+
+print("Check that smaple string C end with 'o' :",sampC.endswith("o"),"\n")
+
+print("Check that smaple string C end with '-o' :",sampC.endswith("-o"),"\n")
+
+sampC = sampC.upper()   # <span style="background: RED; color: WHITE;">This method is used to convert all string to upper case</span>
+
+print("Sample strinc C after conveting to upper case :",sampC,"\n")
+
+sampC = sampC.lower()  # <span style="background: RED; color: WHITE;">This method is used to convert all string to lower case</span>
+
+print("Sample strinc C after conveting to lower case :",sampC,"\n")
+
+ls =  samp.split(" ") # <span style="background: RED; color: WHITE;">This method convert string into list by spliting on the basis of passed character</span>
+
+print("Sample string after split :",ls,"\n")
+
+
+ls = [random.randint(3,1000) for i in range(0,10)]
+
+print("Items in list :",ls,"\n")
+
+print("Maximum value in list :",max(ls),"\n") # <span style="background: RED; color: WHITE;">This method is used to find maximum value present in list</span>
+
+print("Minimum value in list :",min(ls),"\n") # <span style="background: RED; color: WHITE;">This method is used to find minimum value present in list</span>
+
+print("Absolute value of -15 is :",abs(-15),"\n") # <span style="background: RED; color: WHITE;">This method print absolute value of pass numeric value</span>
+
+print("Sum of all item in list :",sum(ls),"\n") # <span style="background: RED; color: WHITE;">This method print sum of all elements present in List</span>
+
+
+if all([i>10 for i in ls]):    # <span style="background: RED; color: WHITE;">This method take list as argument and check conditon by iterating each value</span>
+  print("All value in list is greater than 10.","\n")
+else:
+    print("Few values in list is not greater than 10","\n")   
+
+if any([i%2==0 for i in ls]): # <span style="background: RED; color: WHITE;">This method take list as argument and check conditon by iterating each value</span>
+  print("At least one value in list is even.","\n")
+else:
+    print("No values in list is even.","\n")  
+
+
+print("Iterating list using enumerate:\n")
+
+for item in enumerate(ls):   # <span style="background: RED; color: WHITE;">This method return (tuple as) index and value both from list</span>
+  print('Index :',item[0],'Value :',item[1])
+
+print("") 
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE;background: SPRINGGREEN; text-align: center;">FUNCTIONAL PROGRAMMING</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Functional programming is a style of programming that (as the name suggests) is based around functions.
+
+ * A key part of functional programming is higher-order functions. We have seen this idea briefly in the 
+   previous lesson on functions as objects. Higher-order functions take other functions as arguments, or return them as results.
+
+ * Functional programming seeks to use pure functions. Pure functions have no side effects, and return a value that depends only on their arguments.   
+   ex:
+      def pure_function(x, y):
+          temp = x + 2*y
+          return temp / (2*x + y)
+ 
+ * Impure function are those which change state of other objects.
+   ex:
+      some_list = []
+
+      def impure(arg):
+        some_list.append(arg)           
+
+ * Lambda functions aren't as powerful as named functions.
+ 
+ * They can only do things that require a single expression - usually equivalent to a single line of code. 
+
+ * Function that are created using Lambda Expression are known as ANONYMOUS.
+
+ * Lambda functions can be assigned to variables, and used like normal functions.
+
+ * However, there is rarely a good reason to do this - it is usually better to define a function with def instead.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Named Function)</span>
+def fun(func,arg):    # <span style="background: RED; color: WHITE;">This is higher order function which take other function as argument</span>      
+  return func(func(arg))
+
+def add(x):
+    return x+15
+
+print("Sum of value fun(add,5) :",fun(add,5),"\n")    
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Lambda Function)</span>
+
+print("Lambda Function (lambda x: x**2 + x*5 +4)(4) : ",(lambda x: x**2 + x*5 +4)(4),"\n") # <span style="background: RED; color: WHITE;">This is the Lambda Function Created on Fly</span>
+
+cube = lambda x: x*x*x  # <span style="background: RED; color: WHITE;">This way we can assign lambda function to a variable and used it later as per use.</span>
+
+print("Cube of 15 is :",cube(15),"\n")  
+
+ls = list(range(11,20))
+
+newLs = list(map(lambda x: x*x,ls))
+
+print("Original list :",ls,"\n")
+print("New List modify using map and (lambda x: x*x) :",newLs,"\n")
+
+ls = list(filter(lambda x:x%2==0,newLs))
+
+print("New List filter using filter and (lambda x:x%2==0) :",ls,"\n")
+
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE; background: RED; text-align: center;">GENERATORS</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Generators are a type of iterable, like lists or tuples.
+ 
+ * Unlike lists, they don't allow indexing with arbitrary indices, but they can still be iterated through with for loops.
+ 
+ * They can be created using functions and the yield statement.
+
+ * The yield statement is used to define a generator, replacing the return of a function to provide a result to its caller 
+   without destroying local variables.
+
+ * Due to the fact that they yield one item at a time, generators don't have the memory restrictions of lists.
+   In fact, they can be infinite!   
+
+ * Finite generators can be converted into lists by passing them as arguments to the list function.  
+
+ * Using generators results in improved performance, which is the result of the lazy (on demand) generation of values, 
+   which translates to lower memory usage. Furthermore, we do not need to wait until all the elements have been generated
+   before we start to use them.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+def fun():
+  for i in range(10,1000,100):
+    yield i
+
+def genEven():
+    for i in range(10,100,7):
+        if i%2==0:
+           yield i    
+
+
+print("Fetch Value From Generators :")
+
+for i in fun():
+    print(i)    
+
+print("")
+
+ls = [i for i in genEven()]
+
+print("List created from generator :",ls,"\n")
+
+ls = list(genEven())
+
+print("List created from generator :",ls,"\n")
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE; background: PURPLE; text-align: center;">SETS</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * Sets are data structures, similar to lists or dictionaries. 
+
+ * They are created using curly braces, or the set function. 
+
+ * They share some functionality with lists, such as the use of in to check whether they contain a particular item.
+
+ * Sets differ from lists in several ways, but share several list operations such as len.
+ 
+ * They are unordered, which means that they can't be indexed.
+
+ * They cannot contain duplicate elements.
+
+ * Due to the way they're stored, it's faster to check whether an item is part of a set, rather than part of a list.
+ 
+ * Instead of using append to add to a set, use add.
+
+ * The method REMOVE removes a specific element from a set; POP removes an arbitrary element.
+
+ * Basic uses of sets include membership testing and the elimination of duplicate entries.
+
+ * Sets can be combined using mathematical operations.
+ 
+ * The union operator | combines two sets to form a new one containing items in either.
+
+ * The intersection operator &amp; gets items only in both.
+
+ * The difference operator - gets items in the first set but not in the second.
+ 
+ * The symmetric difference operator ^ gets items in either set, but not both. 
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+sat = set() # <span style="background: RED; color: WHITE;">This is an empty set.</span>
+
+sat = {} # <span style="background: RED; color: WHITE;">This is an empty set.</span>    
+
+sat = {1,2,2,3,"Shinchan","Nohara",3,4,5,"Nobita","Nobi","Shinchan"} # <span style="background: RED; color: WHITE;">This is set which contains unique element only and in sorted order</span>
+                                                                     # <span style="background: RED; color: WHITE;">Set can have diff. types of element but its not guaranty that</span>
+                                                                     # <span style="background: RED; color: WHITE;">its always shows in sorted order.</span>
+print("Set which contains only unique element :",sat,"\n")
+
+sat = {1,2,2,3,3,4,5,6,1} 
+
+print("Set with one type of elements :",sat,"\n")
+
+print("Check that 5 present in set or not :", 5 in sat,"\n")
+
+print("Check that 5 not in set :", 5 not in sat,"\n")
+
+sat = {"Doreamon","Shinchan","Hathori","Mr.Bean","Perman"} # <span style="background: RED; color: WHITE;">Set containing string not always print in sorted order</span>
+
+print("Set with one type of elements :",sat,"\n")
+
+sat = set(["Doreamon","Shinchan","Hathori","Mr.Bean","Perman"]) # <span style="background: RED; color: WHITE;">We can also create set with using set method</span>
+
+print("Set with string type of elements :",sat,"\n")
+
+sat = {1,2,2,3,3,4,5,6,1} 
+
+sat.add(15) # <span style="background: RED; color: WHITE;">Set have add method to add extra element into set</span>
+
+print("Set after adding extra element : ",sat,"\n")
+
+sat.remove(4) 
+
+print("Set after removing element : ",sat,"\n")
+
+sat.pop()  # <span style="background: RED; color: WHITE;">In set pop removes randomly any element</span>
+
+print("Set after pop : ",sat,"\n")
+
+print("Lenth of set : ",len(sat),"\n")
+
+satA = set([random.randint(1,12) for i in range(10)])
+
+print("Element of setA :",satA,"\n")
+
+satB = set([random.randint(1,12) for i in range(10)])
+
+print("Element of setB :",satB,"\n")
+
+print("Union of setA and setB :",satA | satB,"\n")
+
+print("Intersection of setA and setB :",satA &amp; satB,"\n")
+
+print("Difference of setA and setB :",satA - satB,"\n")
+
+print("Symmetric difference of setA and setB :",satA ^ satB,"\n")
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE; background: TEAL; text-align: center;">ITERTOOLS</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+ * The module itertools is a standard library that contains several functions that are useful in functional programming.
+
+ * One type of function it produces is infinite iterators.
+
+ * The function count counts up infinitely from a value.
+
+ * The function cycle infinitely iterates through an iterable (for instance a list or string).
+
+ * The function repeat repeats an object, either infinitely or a specific number of times.
+
+ * There are also several combinatoric functions in itertool, such as product and permutation.
+
+ * These are used when you want to accomplish a task with all possible combinations of some items.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : </span>
+
+from itertools import count
+
+for i in count(6):      # <span style="background: RED; color: WHITE;">This method count infinitely from given value</span>
+  print(i)
+  if i >= 15:
+    break
+
+print("")
+
+for i in count(6,2):      # <span style="background: RED; color: WHITE;">This method count infinitely from given value and increment always by 2</span>
+  print(i)
+  if i >= 15:
+    break
+
+print("")
+
+for i in count(30,-2):      # <span style="background: RED; color: WHITE;">This method count infinitely from given value and decrement always by 2</span>
+  print(i)
+  if i <= 15:
+    break
+
+print("")
+
+print("Use of repeat  : ",list(repeat("Yo",4)),"\n")    
+
+print("Use of repeat  : ",list(repeat(15.15,4)),"\n")   
+
+print("")
+
+print("Use of repeat  : ",list(repeat("Yo",4)),"\n")    
+
+print("Use of repeat  : ",list(repeat(15.15,4)),"\n")   
+
+
+ls = list(range(0,3))
+
+print("Permutaion of list ls :\n",list(permutations(ls)),"\n")
+
+print("Product of each element to each element of two list :\n",list(product(range(4,8),range(5,9))),"\n")
+
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE; background: TOMATO; text-align: center;">OBJECT ORIENTED PROGRAMMING</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+* Class
+  -----
+
+* Objects are created using classes, which are actually the focal point of OOP.
+
+* The class describes what the object will be, but is separate from the object itself. In other words, a class can be described 
+  as an object's blueprint, description, or definition.
+
+* You can use the same class as a blueprint for creating multiple different objects.
+
+* Classes are created using the keyword class and an indented block, which contains class methods (which are functions). 
+
+
+
+* Constructor
+  -----------
+
+* The __init__ method is the most important method in a class.
+
+* This is called when an instance (object) of the class is created, using the class name as a function.
+
+* All methods must have self as their first parameter, although it isn't explicitly passed, Python adds the self argument to the 
+  list for you; you do not need to include it when you call the methods. Within a method definition, self refers to the instance 
+  calling the method.
+
+* Instances of a class have attributes, which are pieces of data associated with them.
+
+* Classes can have other methods defined to add functionality to them.
+
+* Remember, that all methods must have self as their first parameter.
+
+* These methods are accessed using the same dot syntax as attributes. 
+
+* Classes can also have class attributes, created by assigning variables within the body of the class. These can be accessed either from instances 
+  of the class, or the class itself.
+
+* Class attributes are shared by all instances of the class.   
+
+* Trying to access an attribute of an instance that isn't defined causes an AttributeError. This also applies when you call an undefined method.
+
+
+
+* Inheritance
+  -----------
+
+* Inheritance provides a way to share functionality between classes.
+
+* Imagine several classes, Cat, Dog, Rabbit and so on. Although they may differ in some ways (only Dog might have the method bark), they are 
+  likely to be similar in others (all having the attributes color and name).
+
+* This similarity can be expressed by making them all inherit from a superclass Animal, which contains the shared functionality.
+
+* To inherit a class from another class, put the superclass name in parentheses after the class name.
+
+* A class that inherits from another class is called a subclass.
+
+* A class that is inherited from is called a superclass.
+
+* If a class inherits from another with the same attributes or methods, it overrides them. 
+
+* Inheritance can also be indirect. One class can inherit from another, and that class can inherit from a third class. 
+
+* The function super is a useful inheritance-related function that refers to the parent class. It can be used to find 
+  the method with a certain name in an object's superclass.
+
+
+
+* Magic Methods and Operator Overloading
+  --------------------------------------
+
+* Magic methods are special methods which have double underscores at the beginning and end of their names.
+
+* They are also known as dunders.
+
+* So far, the only one we have encountered is __init__, but there are several others.
+
+* They are used to create functionality that can't be represented as a normal method.
+
+* One common use of them is operator overloading.
+
+* This means defining operators for custom classes that allow operators such as + and * to be used on them.
+
+* An example magic method is :
+   
+   __sub__ for -
+   
+   __mul__ for *
+   
+   __truediv__ for /
+   
+   __floordiv__ for //
+   
+   __mod__ for %
+   
+   __pow__ for **
+   
+   __and__ for &amp;
+   
+   __xor__ for ^
+   
+   __or__ for | 
+
+* The expression x + y is translated into x.__add__(y).
+
+* However, if x hasn't implemented __add__, and x and y are of different types, 
+  then y.__radd__(x) is called.
+
+* There are equivalent r methods for all magic methods just mentioned   
+
+* Python also provides magic methods for comparisons.
+
+  __lt__ for <
+
+  __le__ for <=
+
+  __eq__ for ==
+
+  __ne__ for !=
+
+  __gt__ for >
+
+  __ge__ for >=
+
+* If __ne__ is not implemented, it returns the opposite of __eq__.
+
+* There are no other relationships between the other operators.
+
+* There are several magic methods for making classes act like containers.
+
+ __len__ for len()
+
+ __getitem__ for indexing
+
+ __setitem__ for assigning to indexed values
+
+ __delitem__ for deleting indexed values
+
+ __iter__ for iteration over objects (e.g., in for loops)
+
+ __contains__ for in
+
+* There are many other magic methods that we won't cover here, such as __call__ for calling objects as 
+  functions, and __int__, __str__, and the like, for converting objects to built-in types. 
+
+
+
+* Object Lifecycle
+  ----------------
+
+* The lifecycle of an object is made up of its creation, manipulation, and destruction.
+
+* The first stage of the life-cycle of an object is the definition of the class to which it belongs.
+
+* The next stage is the instantiation of an instance, when __init__ is called. Memory is allocated to store the instance. 
+  Just before this occurs, the __new__ method of the class is called. This is usually overridden only in special cases.
+
+* After this has happened, the object is ready to be used.    
+
+* When an object is destroyed, the memory allocated to it is freed up, and can be used for other purposes.
+
+* Destruction of an object occurs when its reference count reaches zero. Reference count is the number of variables 
+  and other elements that refer to an object.
+
+* If nothing is referring to it (it has a reference count of zero) nothing can interact with it, so it can be safely deleted.
+
+* In some situations, two (or more) objects can be referred to by each other only, and therefore can be deleted as well.
+
+* The del statement reduces the reference count of an object by one, and this often leads to its deletion.
+
+* The magic method for the del statement is __del__.
+
+* The process of deleting objects when they are no longer needed is called garbage collection.
+
+* In summary, an object's reference count increases when it is assigned a new name or placed in a container (list, tuple, or dictionary).
+  The object's reference count decreases when it's deleted with del, its reference is reassigned, or its reference goes out of scope. 
+
+* When an object's reference count reaches zero, Python automatically deletes it.
+
+
+
+* Data Hiding
+  -----------
+
+* A key part of object-oriented programming is encapsulation, which involves packaging of related variables and functions into a single
+  easy-to-use object - an instance of a class.
+
+* A related concept is data hiding, which states that implementation details of a class should be hidden, and a clean standard interface 
+  be presented for those who want to use the class.
+
+* In other programming languages, this is usually done with private methods and attributes, which block external access to certain methods 
+  and attributes in a class.
+
+* The Python philosophy is slightly different. It is often stated as "we are all consenting adults here", meaning that you shouldn't put 
+  arbitrary restrictions on accessing parts of a class. Hence there are no ways of enforcing a method or attribute be strictly private.   
+
+* Weakly private methods and attributes have a single underscore at the beginning.
+
+* This signals that they are private, and shouldn't be used by external code. However, it is mostly only a convention, and does not stop 
+  external code from accessing them.
+
+* Its only actual effect is that from module_name import * won't import variables that start with a single underscore.  
+
+* Strongly private methods and attributes have a double underscore at the beginning of their names. This causes their names to be mangled, 
+  which means that they can't be accessed from outside the class.
+
+* The purpose of this isn't to ensure that they are kept private, but to avoid bugs if there are subclasses that have methods or attributes 
+  with the same names.
+
+* Name mangled methods can still be accessed externally, but by a different name. The method __privatemethod of class Spam could be accessed 
+  externally with _Spam__privatemethod.
+    ex:
+        class Spam:
+          __egg = 7
+          def print_egg(self):
+            print(self.__egg)
+
+        s = Spam()
+        s.print_egg()
+        print(s._Spam__egg)
+        print(s.__egg)  
+
+
+
+* Class Method
+  ------------
+  
+* Methods of objects we've looked at so far are called by an instance of a class, which is then passed to the self parameter of the method.
+
+* Class methods are different - they are called by a class, which is passed to the cls parameter of the method.
+
+* A common use of these are factory methods, which instantiate an instance of a class, using different parameters than those usually passed 
+  to the class constructor.
+
+* Class methods are marked with a classmethod decorator. 
+
+* Technically, the parameters self and cls are just conventions; they could be changed to anything else. However, they are universally followed, 
+  so it is wise to stick to using them.  
+
+
+
+* Static Method
+  -------------
+
+* Static methods are similar to class methods, except they don't receive any additional arguments; they are identical to normal functions 
+  that belong to a class.
+
+* They are marked with the staticmethod decorator.  
+
+
+
+* Properties
+  ----------
+
+* Properties provide a way of customizing access to instance attributes.
+
+* They are created by putting the property decorator above a method, which means when the instance attribute with the same name as the method is 
+  accessed, the method will be called instead.
+
+* One common use of a property is to make an attribute read-only.            
+
+* Properties can also be set by defining setter/getter functions.
+
+* The setter function sets the corresponding property's value.
+
+* The getter gets the value.
+
+* To define a setter, you need to use a decorator of the same name as the property, followed by a dot and the setter keyword.
+
+* The same applies to defining getter functions.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Classes)</span>
+
+class Fun: # <span style="background: RED; color: WHITE;">This is a Class</span>
+  def samp(self):
+    print("Hello Class\n")
+
+obj = Fun()   
+obj.samp()
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Constructor)</span>
+
+class FunB:
+  uname = ""  # <span style="background: RED; color: WHITE;">This is the attribute of the class</span>
+
+  def __init__(self,uname):  # <span style="background: RED; color: WHITE;">This is the constructor</span>
+    self.uname = uname
+
+  def samp(self):    # <span style="background: RED; color: WHITE;">This is the method of class</span>
+    print("User name is : ",self.uname,"\n")
+
+
+obj = FunB("Doreamon")          
+obj.samp()
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (Inheritance)</span>
+
+class superClass:   # <span style="background: RED; color: WHITE;">This class act as superclass for other classes</span>
+  
+  def __init__(self):
+    print("Hello This Is Constructor of superClass\n")
+
+  def funcA(self,name): print("Name :",name,"\n")
+
+  def funcB(self,name): print("Name :",name,"\n")
+
+class sampClassA(superClass):   # <span style="background: RED; color: WHITE;">This is child class 1 , which inherit superClass and it also redifne funcB</span> 
+  def __init__(self): 
+    super().__init__()  # <span style="background: RED; color: WHITE;">This way with help of super we can call constructor of superClass</span>
+    print("This is constructor of classA.\n")
+  def funcB(self,color):  
+    print("Color from classA using funcB :",color,"\n")
+    super().funcB("This call is using super from Class A")  # <span style="background: RED; color: WHITE;">Super is used to access any mrthod of parent class</span>
+
+class sampClassB(superClass):     # <span style="background: RED; color: WHITE;">This is child class 1 , which inherit superClass and it also redifne funcA</span>
+  def funcA(self,color):  print("Color from classB using funcA :",color,"\n")
+
+class sampClassC(sampClassB):   # <span style="background: RED; color: WHITE;">This class inherit sampleClassB , this type of inheritance is multilevel inheritance</span>
+  def funcA(self,cartoon):  print("Inherited class B func A By classC :",cartoon,"\n")    
+
+classA = sampClassA()
+classB = sampClassB()
+classC = sampClassC()
+
+classA.funcA("Class A")
+classA.funcB("RED")
+
+classB.funcA("Class B")
+classB.funcB("GREEN")
+
+classC.funcA("Shinchan")
+classC.funcB("Class C")
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 4 : (Magic Methods and Operator Overloading)</span>
+
+class Magic:
+
+  def __init__(self,value):
+    self.value = value
+
+  def __add__(self,other):   # <span style="background: RED; color: WHITE;">This is also known as MAGIC METHOD , this represent operator overloading</span>
+    return Magic(self.value+other.value)
+
+  def __sub__(self,other):   # <span style="background: RED; color: WHITE;">This is also known as MAGIC METHOD , this represent operator overloading</span>
+    return Magic(self.value-other.value)  
+
+  def __mul__(self,other):   # <span style="background: RED; color: WHITE;">This is also known as MAGIC METHOD , this represent operator overloading</span>
+    return Magic(self.value*other.value)
+
+  def __truediv__(self,other):   # <span style="background: RED; color: WHITE;">This is also known as MAGIC METHOD , this represent operator overloading</span>
+    return Magic(self.value/other.value)  
+
+  def __mod__(self,other):   # <span style="background: RED; color: WHITE;">This is also known as MAGIC METHOD , this represent operator overloading</span>
+    return Magic(self.value%other.value)
+  
+objA = Magic(10)    
+
+objB = Magic(30)    
+
+objC = objA+objB
+
+objD = objA*objB
+
+print("Sum of object A and B is :",objC.value,"\n")
+
+print("Multiplication of object A and B is :",objD.value,"\n")
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 5 : (Object Lifecycle)</span>
+
+a = 42  # <span style="background: RED; color: WHITE;"> Create object <42> </span> 
+b = a  # <span style="background: RED; color: WHITE;"> Increase ref. count  of <42> </span> 
+c = [a]  # <span style="background: RED; color: WHITE;"> Increase ref. count  of <42>  </span>
+
+del a  # <span style="background: RED; color: WHITE;"> Decrease ref. count  of <42> </span>
+b = 100  # <span style="background: RED; color: WHITE;"> Decrease ref. count  of <42> </span> 
+c[0] = -1  # <span style="background: RED; color: WHITE;"> Decrease ref. count  of <42> </span>
+
+#<span style="background: BROWN; color: WHITE;"> Code 6 : (Data Hiding)</span>
+
+class Queue:
+  def __init__(self, contents):
+    self._hiddenlist = list(contents)
+
+  def push(self, value):
+    self._hiddenlist.insert(0, value)
+   
+  def pop(self):
+    return self._hiddenlist.pop(-1)
+
+  def __repr__(self):
+    return "Queue({})".format(self._hiddenlist)
+
+queue = Queue([1, 2, 3])
+
+print(queue)
+
+queue.push(0)
+
+print(queue)
+
+queue.pop()
+
+print(queue)
+
+print(queue._hiddenlist)
+
+# <span style="background: RED; color: WHITE;">In the code above, the attribute _hiddenlist is marked as private, but it can still be accessed in the outside code.</span>
+# <span style="background: RED; color: WHITE;">The __repr__ magic method is used for string representation of the instance.</span>
+
+print("")
+
+class FUN:
+  __privar = 15   # <span style="background: RED; color: WHITE;">By placing double underscore we declare strict private which is not accessible outside class</span>
+  def __prifunc(self):
+    print("This is private method\n")
+
+obj = FUN()
+
+print("Accessing private attribute of class : ",obj._FUN__privar,"\n")  # <span style="background: RED; color: WHITE;">This way we can access strict private things of class</span>
+
+print("Accessing private method of class : \n")
+obj._FUN__prifunc()
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 7 : (Class Method)</span>
+
+class Rectangle:
+  def __init__(self, width, height):
+    self.width = width
+    self.height = height
+
+  def calculate_area(self):
+    return self.width * self.height
+
+  @classmethod        # <span style="background: RED; color: WHITE;">This is decorator for class method</span>
+  def new_square(cls, side_length):  
+    return cls(side_length, side_length) # <span style="background: RED; color: WHITE;">This way we can create object using class method</span>
+
+square = Rectangle.new_square(5)
+print(square.calculate_area(),"\n")
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 8 : (Static Method)</span>
+
+class Pizza:
+  def __init__(self, toppings):
+    self.toppings = toppings
+
+  @staticmethod
+  def validate_topping(topping):
+    if topping == "pineapple":
+      raise ValueError("No pineapples!")
+    else:
+      return True
+
+ingredients = ["cheese", "onions", "spam"]
+if all(Pizza.validate_topping(i) for i in ingredients):
+  pizza = Pizza(ingredients) 
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 9 : (Properties)</span>
+
+class Pizza:
+  def __init__(self, toppings):
+    self.toppings = toppings
+    
+  @property
+  def pineapple_allowed(self):
+    return False
+
+pizza = Pizza(["cheese", "tomato"])
+print(pizza.pineapple_allowed)
+pizza.pineapple_allowed = True
+
+
+
+class PizzaA:
+  def __init__(self, toppings):
+    self.toppings = toppings
+    self._pineapple_allowed = False
+
+  @property
+  def pineapple_allowed(self):
+    return self._pineapple_allowed
+
+  @pineapple_allowed.setter
+  def pineapple_allowed(self, value):
+    if value:
+      password = input("Enter the password: ")
+      if password == "ABC":
+        self._pineapple_allowed = value
+      else:
+        raise ValueError("Alert! Intruder!")
+   
+  @pineapple_allowed.getter
+  def pineapple_allowed(self):  
+    return self._pineapple_allowed
+
+pizza = PizzaA(["cheese", "tomato"])
+print(pizza.pineapple_allowed)
+pizza.pineapple_allowed = True
+print(pizza.pineapple_allowed)
+    </pre>  
+      <hr/>
+
+
+<H3 style="color:WHITE; background: DARKBLUE; text-align: center;">REGULAR EXPRESSION</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+
+*Regular Expression
+ ------------------
+
+* Regular expressions are a powerful tool for various kinds of string manipulation.
+
+* They are a domain specific language (DSL) that is present as a library in most modern programming languages, not just Python.
+
+* They are useful for two main tasks:
+   - verifying that strings match a pattern (for instance, that a string has the format of an email address),
+   - performing substitutions in a string (such as changing all American spellings to British ones).
+
+* Regular expressions in Python can be accessed using the re module, which is part of the standard library.
+
+* After you've defined a regular expression, the re.match function can be used to determine whether it matches at the beginning of a string.
+
+* If it does, match returns an object representing the match, if not, it returns None.
+
+* To avoid any confusion while working with regular expressions, we would use raw strings as r"expression".
+
+* Raw strings don't escape anything, which makes use of regular expressions easier.   
+
+* Other functions to match patterns are re.search and re.findall.
+
+* The function re.search finds a match of a pattern anywhere in the string.
+
+* The function re.findall returns a list of all substrings that match a pattern.
+
+* The regex search returns an object with several methods that give details about it.
+  
+* These methods include group which returns the string matched, start and end which return the start and ending positions of the first match, 
+  and span which returns the start and end positions of the first match as a tuple.
+
+* One of the most important re methods that use regular expressions is sub.
+  Syntax:
+    re.sub(pattern, repl, string, max=0)
+
+* This method replaces all occurrences of the pattern in string with repl, substituting all occurrences, unless max provided. This method returns
+  the modified string.
+
+
+
+* Simple Metacharacter
+  --------------------
+
+* Metacharacters are what make regular expressions more powerful than normal string methods.
+
+* They allow you to create regular expressions to represent concepts like "one or more repetitions of a vowel".
+
+* The existence of metacharacters poses a problem if you want to create a regular expression (or regex) that matches a literal metacharacter, such as 
+  "$". You can do this by escaping the metacharacters by putting a backslash in front of them.
+
+* However, this can cause problems, since backslashes also have an escaping function in normal Python strings. This can mean putting three or four 
+  backslashes in a row to do all the escaping.
+
+* The first metacharacter we will look at is . (dot).
+
+* This matches any character, other than a new line.  
+
+* The next two metacharacters are ^ and $.
+
+* These match the start and end of a string, respectively.
+
+* The pattern "^gr.y$" means that the string should start with gr, then follow with any character, except a newline, and end with y.
+
+* Some more metacharacters are *, +, ?, { and }.
+
+* These specify numbers of repetitions.
+
+* The metacharacter * means "zero or more repetitions of the previous thing". It tries to match as many 
+  repetitions as possible. The "previous thing" can be a single character, a class, or a group of characters in parentheses.
+
+* The metacharacter + is very similar to *, except it means "one or more repetitions", as opposed to "zero or more repetitions".
+
+* Curly braces can be used to represent the number of repetitions between two numbers.
+
+* The regex {x,y} means "between x and y repetitions of something".
+
+* Hence {0,1} is the same thing as ?.
+
+* If the first number is missing, it is taken to be zero. If the second number is missing, it is taken to be infinity.
+
+
+
+
+* Characterset
+  ------------
+
+* Character classes provide a way to match only one of a specific set of characters.
+
+* A character class is created by putting the characters it matches inside square brackets.  
+
+* Character classes can also match ranges of characters.
+
+    Some examples:
+
+    The class [a-z] matches any lowercase alphabetic character.
+
+    The class [G-P] matches any uppercase character from G to P.
+
+    The class [0-9] matches any digit.
+
+    Multiple ranges can be included in one class. For example, [A-Za-z] matches a letter of any case.
+
+* Place a ^ at the start of a character class to invert it.
+
+* This causes it to match any character other than the ones included.
+
+* Other metacharacters such as $ and ., have no meaning within character classes.
+
+* The metacharacter ^ has no meaning unless it is the first character in a class.    
+
+* The metacharacter ? means "zero or one repetitions".
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 (Regular Expression): </span>
+
+import re
+
+pattern = r"pikachu"
+
+if re.match(pattern,"HellopikachuTOTOTOT"): # <span style="background: RED; color: WHITE;">This method only check that pattern is matching with beginning or not</span>
+  print("Pattern Found.\n")
+else:
+  print("No Pattern Found.\n")  
+
+
+if re.search(pattern,"helloshinchanpikachu"): # <span style="background: RED; color: WHITE;">This method search pattern that present anywhere in the given pattern</span>
+  print("Pattern Found.\n")
+else:
+  print("No Pattern Found.\n")  
+
+
+print(re.findall(pattern,"hellopikachudorepikachushinchanpikachu"),"\n") # <span style="background: RED; color: WHITE;">This method returns list of string that matches with pattern</span>
+
+match = re.search(pattern,"helloshinchanpikachu")
+
+if match:
+  print("String that matches :",match.group(),"\n") # <span style="background: RED; color: WHITE;">This method give string that match</span>
+
+  print("Start index of string that matches :",match.start(),"\n") # <span style="background: RED; color: WHITE;">This method give start index of string that match</span>
+
+  print("End index of string that matches :",match.end(),"\n") # <span style="background: RED; color: WHITE;">This method give end index of string that match</span>
+
+  print("Start and End index of string that matches :",match.span(),"\n") # <span style="background: RED; color: WHITE;">This method give start and end index of string as tuple that match</span>
+
+
+samp = "helloshinchan,hishinchan" 
+
+pat = r"shinchan"
+
+newsamp = re.sub(pat,"doreamon",samp)  # <span style="background: RED; color: WHITE;">This replace each matching substring with given string</span>
+
+print("Original string : ",samp,"\n")
+
+print("New string after replacing substring of original string : ",newsamp,"\n")    
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Simple Metacharacter)</span>
+
+pattern  = "nar.to" 
+
+if re.match(pattern,"naruto"):    # <span style="background: RED; color: WHITE;">This way we can find all world where original string character where missing.</span>
+  print("Pattern match with 'naruto'.\n")
+
+if re.match(pattern,"naroto"):
+  print("Pattern match with 'naroto'.\n")
+
+if re.match(pattern,"narto"):
+  print("Pattern match with 'narto'.\n")    
+
+pattern = "^l.ght$"   # <span style="background: RED; color: WHITE;">Symbol ^ means that pattern should start with specific char and $ means pattern should end with specific char</span>
+
+if re.match(pattern,"light"):
+  print("Pattern match with 'light'.\n")
+
+if re.match(pattern,"loght"):
+  print("Pattern match with 'loght'.\n")
+
+if re.match(pattern,"l.ghe"):
+  print("Pattern  match with 'l.ghe'.\n")
+else: 
+  print("Pattern not  match with 'l.ghe'.\n")  
+
+
+
+pattern = r"nobita(doreamon)*"   # <span style="background: RED; color: WHITE;">* means pattern before it repeates 0 or more times</span>
+
+if re.match(pattern,"nobita"):
+  print("Pattern matches with 'nobita'\n")
+
+if re.match(pattern,"nobitadoreamondoreamonYo"):
+  print("Pattern matches with 'nobitadoreamondoreamonYo'\n")  
+
+
+pattern = r"[naruto]+"  # <span style="background: RED; color: WHITE;">+ means pattern before it must occur 1 time , or more than one time</span>
+
+
+if re.match(pattern,"naruto"):
+  print("Pattern match with naruto\n")
+
+if re.match(pattern,"narutonarutonaruto"):
+  print("Pattern match with narutonarutonaruto\n")
+
+if re.match(pattern,"onarutoooo"):
+  print("Pattern  match with 'onarutoooo'\n") 
+else:
+  print("Pattern not match with 'onarutoooo'\n")  
+
+
+pattern = r"light(-)?shinigami"
+
+if re.match(pattern,"light-shinigami"):
+  print("Pattern match with 'light-shinigami'\n")
+
+if re.search(pattern,"Llightshinigami"):
+  print("Pattern match with 'Llightshinigami'\n")
+
+if re.match(pattern,"Llight--shinigami"):
+  pass
+else:
+  print("Pattern not match with 'Llight--shinigami'\n") 
+
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (Characterset)</span>
+
+pattern  = r"[abcsefgh]"   # <span style="background: RED; color: WHITE;">This way we can check that if any one of this character present in string</span>
+
+if re.search(pattern,"sample"):
+  print("First Pattern match.\n")
+
+if re.search(pattern,"qwlk"):
+  print("Second Pattern match.\n")
+else:
+  print("Second Pattern not match.\n")  
+
+if re.search(pattern,"shinchan"):
+  print("Third Pattern match.\n")   
+
+
+
+pattern = r"[^A-Z]"
+
+if re.search(pattern,"Abcd123"):    # <span style="background: RED; color: WHITE;">It search that if there is any other char then in pattern</span>
+  print("Pattern not match with 'Abcd123' \n")
+
+if re.search(pattern,"ABCZE"):
+  pass
+else: 
+  print("Pattern match with 'ABCZE' \n")  
+
+# <span style="background: RED; color: WHITE;">r"[^A-Z]" does NOT imply that no uppercase letters should be included. It just searches for all the </span>  
+# <span style="background: RED; color: WHITE;">other possible characters. And in the 2nd "if" finds lowercase letters and numbers! </span>
+
+    </pre>  
+      <hr/>
+
+<br/><br/>
+<H2 style="background: BLUE; color:WHITE; text-align: center;">WEB SCRAPPING USING PYTHON</H2>
+
+<H3 style="color:WHITE; background: TEAL; text-align: center;">WRITING INTO EXCEL FILE</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+
+* This require xlsxwriter module.
+
+* From xlsxwriter we have to import Workbook which is blank excel sheet.
+
+* We need xlrd module to read from excel file.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Write into Excel File)</span>
+
+from xlsxwriter import Workbook
+
+
+workbook = Workbook("sampleA.xlsx") # <span style="background: RED; color: WHITE;">Here we create a Workbook. Class Workbook takes first parameter as file name</span>
+
+
+worksheetA = workbook.add_worksheet() # <span style="background: RED; color: WHITE;">With the help of this method we create a worksheet i.e sheet1 , sheet2 e.t.c</span>
+
+worksheetA.write(0,0,"Heading 1")  # <span style="background: RED; color: WHITE;">With the help of this method we can write in sheet , it takes 3 parameter (row,col,value)</span>
+worksheetA.write(0,1,"Heading 2")
+worksheetA.write(0,2,"Heading 3")
+
+worksheetA.write(1,0,"Value 1")
+worksheetA.write(1,1,"Value 2")
+worksheetA.write(1,2,"Value 3")
+
+
+worksheetB = workbook.add_worksheet() 
+
+for i in range(0,16):
+  for j in range(0,16):
+    worksheetB.write(i,j,"({0},{1})".format(i,j))
+
+workbook.close() # <span style="background: RED; color: WHITE;">With the help of this method we close Workbook, if we not do this our data might get corrupted</span>
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Read data from Excel File)</span>
+
+import xlrd # <span style="background: RED; color: WHITE;">This module need to read from excel file</span>
+
+workbook = xlrd.open_workbook("sampleA.xlsx") # <span style="background: RED; color: WHITE;">This method open excel file into read mode</span>
+
+worksheetB = workbook.sheet_by_index(1) # <span style="background: RED; color: WHITE;">By this way we can select sheet we want to read</span>
+
+totalRow = worksheetB.nrows  # <span style="background: RED; color: WHITE;">This return total number of rows in our excel sheet</span>
+
+for i in range(totalRow):
+  value = worksheetB.row_values(i) # <span style="background: RED; color: WHITE;">This method return list of values in given index row</span>
+  print("Row {0} values : {1}\n".format(i,value))
+
+
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE; background: RED; text-align: center;">Beautiful Soup</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+
+* url: It is the website/page you want to open. 
+
+* response: Great! Your internet connection works, your URL is correct; you are allowed to access this page. It is just like you can see the web page now in your browser. 
+
+* data: It is like you are using copy-paste to get the text, namely the source code, of the page into memory, but it is rather into a variable. 
+
+* soup: You are asking BeautifulSoup to parse text; i.e. to extract text out of tags. 
+
+* tags: You are now extracting specific tags like tags for links into a list so that you can loop on them later.
+
+
+
+* Requests in Python
+  ------------------
+
+* Most common two types of request are used :
+   
+    > GET    : It is used to retrive information
+
+    > POST   : It is used to send data to server
+
+* This can be achive using requests.get(url) method.
+
+* Status Code : This represent how server process information. It is 3 digit code
+       
+      1XX (100-199) : (Information) It means server is sending back some information.
+
+      2XX (200-299) : (Sucess) It means our request is process succesfully.
+
+      3XX (300-399) : (Redirected) It means our request is redirected to any server , url anyother place.
+
+      4XX (400-499) : (Client Error) It means error there is some problem on client side either url is wrong or we are not allow to access that url.
+
+      5XX (500-599) : (Server Error) It means error occur on server side while processing our data.    
+
+* It also have headers with it , Header contain information about any web items      
+
+* There is option for timeout , timeout require to prevent from infite waiting for response from server.
+  Sometime server is not able to response quick due to this we have to wait for long time, inorder to prevent this 
+  situtation there is option for timeout. 
+
+* Timeout mostly in multiple of 3.
+
+
+
+* User Agent
+  ----------
+
+* User Agent is used to act as browser not robot .
+
+* If we simply request server without header , server know that a piece of code is accessing server not user.  
+
+* So user agent add fake header to request so that it seems like user is sending a request.        
+
+* for this we use fake_useragent package.
+
+
+
+* Beautiful Soup
+  --------------
+
+* It is a parser which we used to parse HTML data.
+
+* lxml is another external parser.
+</pre>     
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Requests)</span>
+
+import requests
+
+response = requests.get("https://www.google.com") # <span style="background: RED; color: WHITE;">Using this method we can get page response. This method return response object </span>
+
+print(response,"\n")
+
+print(response.content,"\n") # <span style="background: RED; color: WHITE;">By doing this we can see content of repsonse object</span>
+
+print(response.status_code,"\n") # <span style="background: RED; color: WHITE;">This return status code from server side</span>
+
+headData = response.headers  # <span style="background: RED; color: WHITE;">This return a dcitionary which contain header information</span>
+
+for key,value in headData.items():
+  print(key,'\t',value,"\n")
+
+
+response = requests.get("https://www.google.com", timeout = 6) # <span style="background: RED; color: WHITE;">This way we can give specific time to accpet server request after</span>
+                                                               # <span style="background: RED; color: WHITE;">timeout code procced furthure</span>    
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (User Agent)</span>
+
+import requests
+from fake_useragent import UserAgent # <span style="background: RED; color: WHITE;">This module is used to create fake user</span>
+
+ua = UserAgent() # <span style="background: RED; color: WHITE;">By doing this we can create object of user agent</span>
+
+header = {'user-agent':ua.chrome} # <span style="background: RED; color: WHITE;">This way we can create header , so that we can create fake identity</span>
+
+print(ua.chrome,"\n") # <span style="background: RED; color: WHITE;">It print informationt that is sent by Chrome to websites while requesting page</span>
+
+url = "https://www.google.com"
+
+response = requests.get(url,headers = header) # <span style="background: RED; color: WHITE;">This way we can pass fake header to website</span>
+
+print(response.content,"\n")
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (Beautiful Soup)</span>
+
+from bs4 import BeautifulSoup
+import requests
+from fake_useragent import UserAgent
+
+with open("its.html") as file:
+  htmlFile = file.read()
+
+soup = BeautifulSoup(htmlFile, 'lxml') # <span style="background: RED; color: WHITE;">If lxml not present then use 'html.parser'</span>
+
+'''
+# 1. Simple Beautiful Soup
+
+print("Simple soup object :\n",soup,"\n") # <span style="background: RED; color: WHITE;">It print text in soup</span>
+
+print("Prettify soup : \n",soup.prettify(),"\n") # <span style="background: RED; color: WHITE;">This method is used to format HTML code into design manner</span>
+
+'''
+
+'''
+# 2
+
+ua = UserAgent()
+
+header = {'user-agent':ua.chrome}
+
+url = "http://www.google.com"
+
+response = requests.get(url, headers = header, timeout = 3)
+
+data = response.text
+
+#soup = BeautifulSoup(data, 'lxml')
+
+#print(soup.prettify(),"\n")
+'''
+
+'''
+# 3. Accessing Tags
+
+meta = soup.meta # <span style="background: RED; color: WHITE;">This way we can extract meta tag from html page</span>
+                 # <span style="background: RED; color: WHITE;">This gives first occrance of meta tag in page</span> 
+
+div = soup.div # <span style="background: RED; color: WHITE;">This way we can extract div tag from html page</span>
+                 # <span style="background: RED; color: WHITE;">This gives first occrance of div tag in page</span> 
+
+print(meta,"\n")
+
+print(div,"\n")
+
+print(meta.get('charset'),"\n") # <span style="background: RED; color: WHITE;">This method give value of attribute asosiated with tag</span>
+
+print(meta['charset'],"\n") # <span style="background: RED; color: WHITE;">This is dicitonary way extarcting attribute value</span>
+
+body = soup.body
+
+print(body,"\n")
+
+body['flag'] = "STOP" # <span style="background: RED; color: WHITE;">This way we can create our own tag for conveniens</span>
+
+print(body['flag'],"\n")
+
+
+print(body['class'],"\n") # <span style="background: RED; color: WHITE;">In this html code it has multiple class so it return a list of values</span>
+
+'''
+
+# 4.Navigable String
+
+title = soup.title
+
+#print(title,"\n")
+
+#print(title.string,"\n")  # <span style="background: RED; color: WHITE;">This way we can extract text inside title,it is known as navigable string</span>
+
+title.string.replace_with("Title is change") # <span style="background: RED; color: WHITE;">This is the method of navigable string</span>
+
+#print(title,"\n") 
+
+#print("")
+
+with open("ts.html") as file:
+  htmlFile = file.read()
+
+soup = BeautifulSoup(htmlFile, 'lxml')
+
+body = soup.body
+
+# for data in body.contents: # <span style="background: RED; color: WHITE;"> .contents return list of items in body</span>
+#   print( data if data is not None and data != '\n' else '-'*80)
+
+# <span style="background: RED; color: WHITE;"> .contents gives list of items </span>
+
+# <span style="background: RED; color: WHITE;"> .children gives iterable list which helps alot</span>
+
+# <span style="background: RED; color: WHITE;"> .string fetch string content inside tags</span>
+
+# <span style="background: RED; color: WHITE;"> .str also fetch string content inside tags</span>
+
+# <span style="background: RED; color: WHITE;"> Both .string and .str not work if there is another tag inside a tag then it return None object</span>
+
+# <span style="background: RED; color: WHITE;"> .text solve above problem it return string content in same format which present in html.</span>
+
+# for data in body.children: # <span style="background: RED; color: WHITE;"> .children return list iterator of items in body</span>
+#    print( str.replace(data.text,"\n","") if data is not None and data != '\n' else '-'*80)
+
+
+print(body.descendants,"\n")  # <span style="background: RED; color: WHITE;">This mthod return generators , which having all the child inside tags. Best way to extract data</span>
+
+print("Index | Data\n","-"*90)
+
+for index,data in enumerate(body.descendants):
+  print('(',index,') |',str.replace(str(data),"\n",'') if data is not None and data !='\n' else '-'*90,'\n')
+
+    </pre>  
+      <hr/>
+
+<H1 style="color:WHITE; background: BLUE; text-align: center;">Data Analysis</H1> 
+
+<H3 style="color:WHITE; background: RED; text-align: center;">Pandas</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+* pip install pandas
+
+* pip install jupyter
+
+* pip install geopy
+
+* Pandas is tool available for data analysis.
+
+* Here we work with dataframe , which contains all information.
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Creating Data Using Pandas)</span>
+
+import pandas
+
+df1 = pandas.DataFrame([['Prajwal','20','Python'],['Nick','20','C++']])
+ # <span style="background: RED; color: WHITE;">This method is used to create dataframe</span>
+ # <span style="background: RED; color: WHITE;"> First Parameter is rows of dataframe</span>
+
+print(df1,"\n") # <span style="background: RED; color: WHITE;">This print dataframe having rows with indexed column number</span>
+
+df2 = pandas.DataFrame([['Prajwal','20','Python'],['Nick','20','C++']],columns = ['Name','Age','Language'])
+ # <span style="background: RED; color: WHITE;">This way we can give names to column header.</span>
+
+print(df2,"\n")
+
+df3 = pandas.DataFrame([['Prajwal','20','Python'],['Nick','20','C++']],columns = ['Name','Age','Language'],index=['Row 1','Row 2'])
+ # <span style="background: RED; color: WHITE;">This way we can give names to row.</span>
+
+print(df3,"\n")
+
+
+df4 = pandas.DataFrame([{'Name':'Prajwal','Age':'20','Lang':'Python'},{'Name':'Prajwal','Age':'20','Lang':'Python'},
+                       {'Name':'Prajwal','Age':'20'},{'Name':'Nick','Exp':'4 year'}])
+
+ # <span style="background: RED; color: WHITE;">This way we can pass dictionary to list and due to this it take key as column name in dictionary</span>
+ # <span style="background: RED; color: WHITE;">If any value is not pass then it consider as NaN.</span>
+
+print(df4,"\n")
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Reading Excel,Json,CSV,Text File using Pandas)</span>
+
+# <span style="background: RED; color: WHITE;">We can also pass URL in place of file name.</span>
+
+df1 = pandas.read_csv("supermarkets.csv")
+ # <span style="background: RED; color: WHITE;">This method is used to read csv files.</span>
+ # <span style="background: RED; color: WHITE;">CSV : Character Seperated Value </span>
+
+print(df1,"\n")
+
+
+df2 = pandas.read_json("supermarkets.json")
+ # <span style="background: RED; color: WHITE;">This method is used to read json file.</span>
+ # <span style="background: RED; color: WHITE;"> JSON : JavaScript Object Notation</span>
+
+print(df2,"\n")
+
+df3 = pandas.read_excel("supermarkets.xlsx",sheetname=0)
+ # <span style="background: RED; color: WHITE;">Using this method we can read excel file , but in this we have to pass sheet number.</span>
+
+print(df3,"\n")
+
+dfD = pandas.read_csv("supermarkets-commas.txt")
+ # <span style="background: RED; color: WHITE;">This way we can read a text file which is seperated by commas.</span>
+
+print(dfD)
+
+
+dfE = pandas.read_csv("supermarkets-semi-colons.txt",sep=";")
+# <span style="background: RED; color: WHITE;">This we can read text file seperated by any character , we pass it as argument</span>
+
+print(dfE)
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (Slicing Dataframes)</span>
+
+dfA = pandas.read_csv("supermarkets.csv")
+
+print(dfA,"\n")
+
+print(dfA.set_index("Employees"),"\n")
+
+# <span style="background: RED; color: WHITE;">With this method we can index dataframe on the basis of any column name.</span>
+# <span style="background: RED; color: WHITE;">It can not make any changes in orignal data , it return new object with modify data.</span>
+
+print(dfA.loc[0:3,"Country":"Name"],"\n")
+
+# <span style="background: RED; color: WHITE;">This way we can slice dataframe , loc[a:b,c:d]</span>
+
+print(dfA.loc[0,"Name"],"\n")
+
+# <span style="background: RED; color: WHITE;">We can also access specific data.</span>
+
+print(dfA.iloc[0,3],"\n") # <span style="background: RED; color: WHITE;">This used when we want to index by number</span>
+
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 4 : (Droping Dataframes)</span>
+
+dfA = pandas.read_csv("supermarkets.csv")
+
+dfA.drop("Country",1)  # <span style="background: RED; color: WHITE;">This method drop column Country from data frame, and return new object</span>
+             # <span style="background: RED; color: WHITE;">Original Dataframe remains uaffected.</span>
+             # <span style="background: RED; color: WHITE;">Second param is for rows : 0 and column : 1 , i.e given name is of row or column</span>
+
+dfA.drop(dfA.columns[0:2],1)
+
+dfA.drop(dfA.index[0:1],0)
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 5 : (Adding Rows and Columns To Dataframes)</span>
+
+dfA = pandas.read_csv("supermarkets.csv")
+
+dfA['Continet'] = dfA.shape[0] * ["Asia"]
+
+# <span style="background: RED; color: WHITE;">This way we can add new columns to dataframe</span>
+# <span style="background: RED; color: WHITE;">Here dfA.shape[0] is actually total rows number shape(r,c) </span>
+
+dfA["City"]=dfA["City"]+","+dfA["Country"]
+
+# <span style="background: RED; color: WHITE;">This way we can update a column.</span>
+
+dfA_t = dfA.T
+
+dfA_t[7]=dfA_t.shape[0]*["My Info"]
+
+dfA = dfA_t.T
+
+# <span style="background: RED; color: WHITE;">This is a trick to add new row to dataframe.</span>
+# <span style="background: RED; color: WHITE;">First we take transpose of original dataframe add column to it then again take transpose.</span>
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 6 : (Working With GeoLocations)</span>
+
+from geopy.geocoders import Nominatim
+
+# <span style="background: RED; color: WHITE;">This module use online database to fetch geolocation</span>
+
+nom = Nominatim()
+
+geoObj = nom.geocode("Varanasi,Uttar Pradesh")
+
+# <span style="background: RED; color: WHITE;">This method accept a string having location address.</span>
+
+print(geoObj)
+
+
+print(geoObj.latitude," ",geoObj.longitude)
+
+# <span style="background: RED; color: WHITE;">This way we can fetch geo locations.</span>
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 7 : (GeoLocations &amp; Dataframes)</span>
+
+dfA = pandas.read_excel("supermarkets.xlsx")
+
+dfA["FullAddress"] = dfA['Address'] + ',' + dfA['City'] + ',' + dfA['State'] + ',' + dfA['Country']
+
+dfA["Location"] = dfA['FullAddress'].apply(nom.geocode)
+
+# <span style="background: RED; color: WHITE;">This way we can iterate series object using apply</span>
+
+dfA["Latitude"] = dfA['Location'].apply(lambda x : x.latitude if x!=None else None)
+
+dfA["Longitude"] = dfA['Location'].apply(lambda x : x.longitude if x!=None else None)
+
+print(dfA)
+
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE; background: RED; text-align: center;">Numpy</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+* pip install numpy
+
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Numpy Arrays)</span>
+
+import numpy
+
+array = numpy.arange(64)
+
+# <span style="background: RED; color: WHITE;">This way we can create a 1D array</span>
+
+print(array,"\n")
+
+
+array2D = array.reshape(8,8)
+
+# <span style="background: RED; color: WHITE;">This way we can convert a single dimension array to 2D</span>
+
+print(array2D,"\n")
+
+
+array3D = array2D.reshape(4,4,4)
+
+# <span style="background: RED; color: WHITE;">This way we can convert a 2D array to 3D array</span>
+
+print(array3D)
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Numpy &amp; OpenCV)</span>
+
+
+    </pre>  
+      <hr/>
+
+<H3 style="color:WHITE; background: RED; text-align: center;">Matplotlib</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+
+* pip install matplotlib
+
+* It is used to visualize data.
+
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (Basics of Matplotlib) </span>
+
+from matplotlib import pyplot # <span style="background: RED; color: WHITE;">This import pyplot module form matplotlib</span>
+from matplotlib import style # <span style="background: RED; color: WHITE;">This module is use to style the graph.</span>
+
+for design in style.available:
+
+  style.use(design)
+
+  X = [5,8,10]
+
+  Y = [12,16,6]
+
+  pyplot.plot(X,Y)  # <span style="background: RED; color: WHITE;">Using this way we can plot data in X-Y Plane.</span>
+
+  pyplot.title(design) # <span style="background: RED; color: WHITE;">This set title of graph.</span>
+
+  pyplot.xlabel('X axis') # <span style="background: RED; color: WHITE;">This set name to x axis of graph.</span>
+
+  pyplot.ylabel('Y axis') # <span style="background: RED; color: WHITE;">This set name to y axis of graph.</span>
+
+  pyplot.show() # <span style="background: RED; color: WHITE;">This way we can show panel.</span>
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Subplots of Pyplot) </span>
+
+style.use('ggplot')
+
+X1 = [5,8,10]
+
+Y1 = [12,16,6]
+
+X2 = [6,9,11]
+
+Y2 = [6,15,7]
+
+fig = pyplot.figure() # <span style="background: RED; color: WHITE;">This create a plane figure to plot graph.</span>
+
+plot1 = pyplot.subplot2grid((10,25),(0,0),rowspan=10 , colspan = 10) # <span style="background: RED; color: WHITE;">This is for graph1.</span>
+
+# <span style="background: RED; color: WHITE;">This method take 1 argument as : total sizeof row and column </span>
+# <span style="background: RED; color: WHITE;">This method take 2 argument as : current row and column </span>
+# <span style="background: RED; color: WHITE;">This method take 3 argument as : graph row size </span>
+# <span style="background: RED; color: WHITE;">This method take 4 argument as : graph column size </span>
+
+plot2 = pyplot.subplot2grid((10,25),(0,15),rowspan=10 , colspan = 10)
+
+plot1.plot(X1,Y1,'m',label='line one',linewidth=3) # <span style="background: RED; color: WHITE;"> 4th parameter is for legend.</span>
+
+plot2.plot(X2,Y2,'y',label='line two',linewidth=3)
+#                ---  
+#                 |  
+#                 o : circle (shape)
+#                 h : hexagon
+#                 p : pentagon
+#                 s : square
+#                 d : diagonal
+#                 x : cross
+#                 r : RED  (color)
+#                 g : GREEN
+#                 y : YELLOW
+#                 c : CYAN
+#                 v : downward triangles
+#                 b : blue
+#                 k : black 
+#                 m : maroon
+#                 w : white
+
+plot1.set_title('Graph A') # <span style="background: RED; color: WHITE;">This way we can set title for subplot graph</span>
+plot1.set_xlabel('X axis')
+plot1.set_ylabel('Y axis')
+
+plot2.set_title('Graph B')
+plot2.set_xlabel('X axis')
+plot2.set_ylabel('Y axis')
+
+plot1.legend() # <span style="background: RED; color: WHITE;">To add legend to graph.</span>
+plot2.legend()
+
+pyplot.show()
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (BARS of Pyplot) </span>
+
+X1 = [5,8,10]
+
+Y1 = [12,16,6]
+
+X2 = [6,9,11]
+
+Y2 = [6,15,7]
+
+style.use('ggplot')
+
+pyplot.bar(X1,Y1,color = 'g',label="Group A" , align = "center") # <span style="background: RED; color: WHITE;">This method is used to plot bars.</span>
+
+pyplot.bar(X2,Y2,color = 'c',label="Group B", align = "center")
+
+pyplot.legend()
+
+pyplot.show()
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 4 : (SCATTERS of Pyplot) </span>
+
+X1 = [5,8,10]
+
+Y1 = [12,16,6]
+
+X2 = [6,9,11]
+
+Y2 = [6,15,7]
+
+style.use('ggplot')
+
+pyplot.scatter(X1,Y1,color = 'g',label="Group A") # <span style="background: RED; color: WHITE;">This method is used to plot bars.</span>
+
+pyplot.scatter(X2,Y2,color = 'c',label="Group B")
+
+pyplot.legend()
+
+pyplot.show()
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 5 : (PIE CHARTS of Pyplot) </span>
+
+style.use('ggplot')
+ 
+# <span style="background: RED; color: WHITE;">Data to plot</span>
+labels = 'Python', 'C++', 'Ruby', 'Java'
+sizes = [2, 1, 24, 21]
+colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
+explode = (0, 0, 0, 0.1)  # explode 4th slice
+
+# <span style="background: RED; color: WHITE;">Plot</span>
+plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+        autopct='%1.1f%%', shadow=True, startangle=0)
+ 
+plt.legend(labels, loc="best")
+
+plt.axis('equal') # <span style="background: RED; color: WHITE;">This method plot all arc from one axis</span>
+
+plt.show()
+
+    </pre>  
+      <hr/>
+
+
+
+<H1 style="color:WHITE; background: ORANGE; text-align: center;">IMAGE PROCESSING</H1> 
+<H3 style="color:WHITE; background: RED; text-align: center;">OpenCV</H3> 
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+NOTES
+-----
+* pip install opencv-python
+
+* Blending is concept to merge to image so that ratio sum to 1.
+
+* Noise : It is just another function which combine with original function to get another function. 
+    ex:
+        I3(x,y) = I1(x,y) + N(x,y) 
+
+        here N is Noise , and its type:
+
+        ** Salt and Peper Noise : Random occurrence of black and white pixel.
+        ** Impulse Noise        : Random occurrence of white pixel.
+        ** Gaussian Noise       : Variation in Intensity.
+
+* Filtering
+  ---------
+
+  With help of filtering we remove noise from images.
+
+  * Moving Average
+    --------------
+
+    It is one of the method to remove noise , its work like take sum of all values
+    form that area and find its means , and place it at center.
+
+  * correlation feltering (uniform weights)
+    ---------------------
+
+    Consider average window size if 2k+1 * 2k+1 (always odd).
+     __________________________________________________________
+    |                                                          | 
+    |                        __k     __k                       | 
+    | G(i,j) =   1           \       \        F [ i+u , j+v]   |
+    |          ______     *  /__     /_                        |
+    |          (2k+1) ^2     u = -k  v = -k                    |
+    |__________________________________________________________|
+     - UNIFORM WEIGHT
+
+  
+
+  * cross - correlation feltering (non-uniform weights)
+    -----------------------------
+
+    This have different weight all over pixel.
+     __________________________________________________________
+    |                                                          | 
+    |          __k     __k                                     | 
+    | G(i,j) = \       \     H[u,v] * F [ i+u , j+v]           |
+    |          /__     /_                                      |
+    |          u = -k  v = -k                                  |
+    |__________________________________________________________|
+     - NONUNIFORM WEIGHT       
+
+     Here H is matrix of linear weight it is sometime call as 'kernel' or 'mask'.
+ 
+
+  * Gaussian Filter
+    ---------------
+
+    It most influence the negibhour pixels. 
+
+
+
+  * Thresholding (Type of Image Segmentation)
+    ------------    
+
+    Let’s start by taking a look at the cv2.threshold function signature:
+
+    (T, threshImage) = cv2.threshold(src, thresh, maxval, type)
+
+    The first parameter is our source image, or the image that we want to perform thresholding on. This image should be grayscale.
+
+    The second parameter, thresh, is the threshold value which is used to classify the pixel intensities in the grayscale image.
+
+    The third parameter, maxval, is the pixel value used if any given pixel in the image passes the thresh  test.
+
+    Finally, the fourth parameter is the thresholding method to be used. The type  value can be any of:
+
+        cv2.THRESH_BINARY
+        cv2.THRESH_BINARY_INV
+        cv2.THRESH_TRUNC
+        cv2.THRESH_TOZERO
+        cv2.THRESH_TOZERO_INV
+
+    Sound complicated? It’s not — I’ll show you examples for each of these thresholding types.
+
+    The cv2.threshold  then returns a tuple of two values. The first value, T , is the value that was used for the thresholding. 
+    In our case, this will be the same value as thresh  that we pass into the cv2.threshold  function.
+    The second value is our actual thresholded image.
+    
+    *Image Segmentation
+     -------------------
+      Image segmentation is the process of partitioning a digital image into multiple segments (sets of pixels, also known as super-pixels). 
+      The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful
+      and easier to analyze
+
+
+    * Fixed thresholding
+      ------------------
+
+      We will first perform fixed thresholding on the input image. Fixed Thresholding is done using the function cv2.threshold. The signature
+      of cv2.threshold is -
+
+      cv2.threshold(src, thresh, maxval, type[, dst]) -> retval, dst
+
+      Here,
+
+          src is the input image.
+          thresh is the threshold value.
+          maxval is the maximum value that can be assigned to the output.
+          type is the type of thresholding.
+          dst is the destination image
+
+      In the example, the threshold value is set to 50 and the threshold type is cv2.THRESH_BINARY i.e. any value that is greater than 50 is 
+      set to 255 and any value less than 55 is set to 0.
+
+      retval, im_at_fixed = cv2.threshold(im_gray, 50, 255, cv2.THRESH_BINARY)
+      axis("off")
+      title("Fixed Thresholding")
+      imshow(im_at_fixed, cmap = 'gray')
+      show()   
+      
+
+    * Adaptive Thresholding
+      ---------------------
+
+      In the previous section, we used a global value as threshold value. But it may not be good in all the conditions where image has different 
+      lighting conditions in different areas. In that case, we go for adaptive thresholding. In this, the algorithm calculate the threshold for 
+      a small regions of the image. So we get different thresholds for different regions of the same image and it gives us better results for 
+      images with varying illumination.
+
+      It has three ‘special’ input params and only one output argument.
+
+      Adaptive Method - It decides how thresholding value is calculated.
+
+              cv2.ADAPTIVE_THRESH_MEAN_C : threshold value is the mean of neighbourhood area.
+              cv2.ADAPTIVE_THRESH_GAUSSIAN_C : threshold value is the weighted sum of neighbourhood values where weights are a gaussian window.
+
+      Block Size - It decides the size of neighbourhood area.
+
+      C - It is just a constant which is subtracted from the mean or weighted mean calculated.    
+
+
+    * Adaptive Thresholding with mean weighted average
+      ------------------------------------------------
+
+      Adaptive Thresholding with mean weighted average is done using the function cv2.adaptiveThreshold. The signature of the function is -
+
+      cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]) -> dst
+
+      Here,
+
+          src  is the input image.
+          maxval is the maximum value that can be assigned to the output.
+          adaptiveMethod is set to cv2.ADAPTIVE_THRESH_MEAN_C  for mean weighted average and to cv2.ADAPTIVE_THRESH_GAUSSIAN_C for 
+          gaussian weighted average.
+          thresholdType - the type of thresholding
+          blockSize  - value of b
+          C is the constant that is subtracted from the threshold value calculated for each pixel
+          dst is the destination image
+
+      For the example, the value of b is 5 and the constant value is set to 10.
+
+      im_at_mean = cv2.adaptiveThreshold(im_gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 10)
+      axis("off")
+      title("Adaptive Thresholding with mean weighted average")
+      imshow(im_at_mean, cmap = 'gray')
+      show()
+
+
+   * Adaptive Thresholding with gaussian weighted average
+     ----------------------------------------------------
+
+    Adaptive Thresholding with gaussian weighted average is done using the function cv2.adaptiveThreshold. The signature of the function is -
+
+    cv2.adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C[, dst]) -> dst
+
+    Here,
+
+        src is the input image.
+        maxval is the maximum value that can be assigned to the output.
+        adaptiveMethod is set to cv2.ADAPTIVE_THRESH_MEAN_C  for mean weighted average and to cv2.ADAPTIVE_THRESH_GAUSSIAN_C  for 
+        gaussian weighted average.
+        thresholdType - the type of thresholding
+        blockSize  is the value of b
+        C is the constant that is subtracted from the threshold value calculated for each pixel
+        dst  is the destination image
+
+    im_at_gauss = cv2.adaptiveThreshold(im_gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 5, 7)
+    axis("off")
+    title("Adaptive Thresholding with gaussian weighted average")
+    imshow(im_at_gauss, cmap = 'gray')
+    show()     
+
+    LINK : http://hanzratech.in/2015/01/21/adaptive-thresholding.html
+    
+
+        </pre>  
+       </div>
+
+      <pre style="font-weight: bold; font-size: 15px;">
+#<span style="background: BROWN; color: WHITE;"> Code 1 : (BASIC OF OPENCV)</span>
+
+import cv2
+
+img = cv2.imread("galaxy.jpg")  # <span style="background: RED; color: WHITE;">By default color image is import</span>
+
+#print(list(img),"\n\n")
+
+
+img = cv2.imread("galaxy.jpg",0) # <span style="background: RED; color: WHITE;">This way we can import image in gray scale format (-1 : color)</span>
+
+#print(list(img),"\n\n")
+
+rimg = cv2.resize(img,(img.shape[0]//2,img.shape[1]//2)) # <span style="background: RED; color: WHITE;">This method resize image into given dimension</span>
+                 # <span style="background: RED; color: WHITE;">This actually resize numpy array.By taking means of values</span>   
+
+cv2.imwrite("cgalaxy.jpg",rimg) # <span style="background: RED; color: WHITE;">This method is used to save images.</span>
+
+
+cv2.imshow("Galaxy",rimg) # <span style="background: RED; color: WHITE;">This is use to show images.</span>
+
+cv2.waitKey(0) # <span style="background: RED; color: WHITE;">This method is used to hold image portal till any key is pressed or time is out</span>
+        # <span style="background: RED; color: WHITE;"> 0 means portal open till any key is pressed and other than 0 ms till portal open</span>
+
+
+cv2.destroyAllWindows() # <span style="background: RED; color: WHITE;">This method is used to close all open portals.</span>
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 2 : (Image Arithmatics)</span>
+
+import cv2
+from matplotlib import pyplot
+from matplotlib import style
+
+
+imgA = cv2.imread("photo.jpg")
+
+imgB = cv2.imread("news.jpg")
+
+
+imgA = cv2.resize(imgA,(300,300))
+imgB = cv2.resize(imgB,(300,300))
+
+
+fig = pyplot.figure()
+
+plot1 = pyplot.subplot2grid((700,600),(0,0),rowspan=300,colspan=300)
+plot2 = pyplot.subplot2grid((700,600),(0,300),rowspan=300,colspan=300)
+plot3 = pyplot.subplot2grid((700,600),(400,0),rowspan=300,colspan=600)
+
+plot1.set_title('Image A')
+plot2.set_title('Image B')
+plot3.set_title('Image C')
+
+plot1.imshow(cv2.cvtColor(imgA, cv2.COLOR_BGR2RGB)) # <span style="background: RED; color: WHITE;">This way we can convert BGR image to RGB because pyplot follow RGB</span>
+plot2.imshow(cv2.cvtColor(imgB, cv2.COLOR_BGR2RGB))
+
+imgC = imgA/2 + imgB/2 # <span style="background: RED; color: WHITE;">Takes average of each pixel.</span>
+# <span style="background: RED; color: WHITE;">Remeber that a+b/2 is differ than a/2 + b/2 in images beacuse of its type uint8 size.</span>
+
+
+plot3.imshow(cv2.cvtColor(imgC, cv2.COLOR_BGR2RGB))
+
+pyplot.show()
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 3 : (Accessing Camera)</span>
+
+import cv2
+import numpy
+
+cap = cv2.VideoCapture(0) # <span style="background: RED; color: WHITE;">Select camera to capture 0,1,2,...depend on number of camera we have in device.</span>
+
+while True:
+
+  status, frame = cap.read()  # <span style="background: RED; color: WHITE;">This return picture frame as well as status of camera i.e True or False</span>
+
+  frameB = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+
+  cv2.imshow('Frame',frameB) 
+
+  if cv2.waitKey(1) &amp; 0xFF == ord("q"): # <span style="background: RED; color: WHITE;">Use to check that key return by waitKey is q or not</span>
+    break
+
+cap.release() # <span style="background: RED; color: WHITE;">Releasing the camera so that it can use by other applications.</span>    
+cv2.destroyAllWindows()
+
+
+#<span style="background: BROWN; color: WHITE;"> Code 4 : (Global Thresholding)</span>
+
+imgA = cv2.imread("bookpage.jpg")
+
+imgA = cv2.resize(imgA,(300,300))
+
+gimgA = cv2.cvtColor(imgA,cv2.COLOR_BGR2GRAY)
+
+ret , threshA = cv2.threshold(gimgA,200,255,cv2.THRESH_BINARY)
+
+ret , threshB = cv2.threshold(gimgA,200,255,cv2.THRESH_BINARY_INV)
+
+ret , threshC = cv2.threshold(gimgA,200,255,cv2.THRESH_TRUNC)
+
+ret , threshD = cv2.threshold(gimgA,200,255,cv2.THRESH_TOZERO)
+
+ret , threshE = cv2.threshold(gimgA,200,255,cv2.THRESH_TOZERO_INV)
+
+cv2.imshow("Thresh A",threshA)
+cv2.imshow("Thresh B",threshB)
+cv2.imshow("Thresh C",threshC)
+cv2.imshow("Thresh D",threshD)
+cv2.imshow("Thresh E",threshE)
+
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+#<span style="background: BROWN; color: WHITE;"> Code 5 : (Adaptive Thresholding)</span>
+
+imgA = cv2.imread("bookpage.jpg")
+
+imgA = cv2.resize(imgA,(600,600))
+
+gimgA = cv2.cvtColor(imgA,cv2.COLOR_BGR2GRAY)
+
+
+threshA = cv2.adaptiveThreshold(gimgA,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,15,2)
+
+threshB = cv2.adaptiveThreshold(gimgA,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY_INV,35,3)
+
+cv2.imshow("Adaptive Mean",threshA)
+
+cv2.imshow("Adaptive Gaussian",threshB)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+    </pre>  
+      <hr/>
+
+
+
+<div style="width:auto; height:auto; background: rgba(50, 20, 158, 0.8); color:WHITE; box-shadow: 0px 0px 15px BLACK;">     
+            <pre style="font-weight: bold; font-size: 15px;">
+                                            
+                                                            By : PRAJWAL SINGH (prajwal_15)
+        </pre>  
+       </div>
+
+    </Body>  
+</Html>
